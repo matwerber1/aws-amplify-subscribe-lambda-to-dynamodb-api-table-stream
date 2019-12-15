@@ -31,7 +31,7 @@ This guide was based on the guidance from https://github.com/aws-amplify/amplify
 	}
 	```
 
-	Note: the `XXXXXX` above should have the name of the API you used during `amplify add api`.
+	Note: the `XXXXXX` above should have the name of the API you used during `amplify add api`. If you do not see this parameter, you may need to run `amplify update function`, and choose to grant your function permission to your API (I need to validate this...). 
 
 2. In the `Resources:` section, add the following: 
 
