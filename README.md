@@ -58,4 +58,47 @@ https://github.com/aws-amplify/amplify-cli/issues/987
 		},
   ```
   
-  Note: again, `XXXXXX` above should be replaced with your API name. In addition, `YYYYYY` should be replaced with the friendly Amplify name (not the actual name in DynamoDB, which will contain additional random characters) of the table you want to subscribe to. This will likely match the resource name in your Amplify GraphQL schema specification (`amplify/backend/api/YOUR_API_NAME/schema.graphql`), but you can also double-check by looking in the [Exports section of the CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/exports)
+  Note: again, `XXXXXX` above should be replaced with your API name. In addition, `YYYYYY` should be replaced with the friendly Amplify name (not the actual name in DynamoDB, which will contain additional random characters) of the table you want to subscribe to. This will likely match the resource name in your Amplify GraphQL schema specification (`amplify/backend/api/YOUR_API_NAME/schema.graphql`), but you can also double-check by looking in the [Exports section of the CloudFormation console](https://console.aws.amazon.com/cloudformation/home?#/exports) for a value in the **Export Value** column with a name similar to `yyyyyTable`.
+  
+  3. In the `Resources:` section of the CloudFormation template, add a new resource to grant your Lambda function permission to access the DynamoDB table's stream: 
+  
+  ```
+  "CustomPolicyForTableStreamSubscription": {
+			"DependsOn": [
+				"LambdaExecutionRole"
+			],
+			"Type": "AWS::IAM::Policy",
+			"Properties": {
+				"PolicyName": "dynamodb-stream-permission",
+				"Roles": [
+					{
+						"Ref": "LambdaExecutionRole"
+					}
+				],
+				"PolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Action": [
+								"dynamodb:GetRecords",
+								"dynamodb:GetShardIterator",
+								"dynamodb:DescribeStream",
+								"dynamodb:ListStreams"
+							],
+							"Resource": [
+								{
+									"Fn::ImportValue": {
+										"Fn::Sub": "${apiXXXXXXGraphQLAPIIdOutput}:GetAtt:DemoTable:StreamArn"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		}
+		
+  ```
+  
+  Note - again, replace `XXXXXX` above with the appropriate API name. 
