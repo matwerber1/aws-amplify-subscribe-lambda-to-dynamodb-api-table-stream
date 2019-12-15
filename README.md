@@ -4,11 +4,9 @@ AWS Amplify allows you to create Lambda functions, as well as AWS AppSync GraphQ
 
 When creating an AWS AppSync API backed by DynamoDB, Amplify will configure the table with an event stream. 
 
-However, there's no "out of the box" Amplify CLI command to configure one of your Amplify functions to receive and process records from your API table's stream.
+However, as of this writing (Dec 17, 2019), there's no "out of the box" Amplify CLI command to configure one of your Amplify functions to receive and process records from your API table's stream.
 
-This project shows examples of how to customize your project to have a Lambda function subscribe to a stream, based on the guidance from this Git issue:
-
-https://github.com/aws-amplify/amplify-cli/issues/987
+This project provides an example of how to customize your Amplify project to subscribe a Lambda function to your table's stream. This guide was based on the guidance from https://github.com/aws-amplify/amplify-cli/issues/987
 
 ## Prerequisites
 
