@@ -89,7 +89,7 @@ https://github.com/aws-amplify/amplify-cli/issues/987
 							"Resource": [
 								{
 									"Fn::ImportValue": {
-										"Fn::Sub": "${apiXXXXXXGraphQLAPIIdOutput}:GetAtt:DemoTable:StreamArn"
+										"Fn::Sub": "${apiXXXXXXGraphQLAPIIdOutput}:GetAtt:YYYYYYTable:StreamArn"
 									}
 								}
 							]
@@ -101,4 +101,4 @@ https://github.com/aws-amplify/amplify-cli/issues/987
 		
   ```
   
-  Note - again, replace `XXXXXX` above with the appropriate API name. 
+  Note - again, replace `XXXXXX` and `YYYYYY` above with the appropriate API name and table name, respectively. 
