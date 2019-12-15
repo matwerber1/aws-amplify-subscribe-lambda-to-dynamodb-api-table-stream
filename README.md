@@ -6,7 +6,7 @@ When creating an AWS AppSync API backed by DynamoDB, Amplify will configure the 
 
 However, as of this writing (Dec 17, 2019), there's no "out of the box" Amplify CLI command to configure one of your Amplify functions to receive and process records from your API table's stream.
 
-This project provides an example of how to customize your Amplify project to subscribe a Lambda function to your table's stream. This guide was based on the guidance from https://github.com/aws-amplify/amplify-cli/issues/987
+This project provides an example of how to manually customize your Amplify project's generated CloudFormation templates to subscribe a Lambda function to your table's stream. This guide was based on the guidance from https://github.com/aws-amplify/amplify-cli/issues/987
 
 ## Prerequisites
 
